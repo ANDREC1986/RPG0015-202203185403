@@ -14,7 +14,6 @@ CREATE TABLE pessoa (
 	idPessoa int primary key not null,
 	nome varchar(255) not null,
 	logradouro varchar(255) not null,
-	complemento varchar(255),
 	cidade varchar(255) not null,
 	estado varchar(2) not null,
 	telefone varchar(11) not null,
@@ -22,35 +21,30 @@ CREATE TABLE pessoa (
 )
 
 CREATE TABLE pessoa_Juridica (
-	cnpj varchar(15) not null primary key,
-	idPessoa int foreign key references pessoa(idPessoa)
+	idPessoa int foreign key references pessoa(idPessoa) not null primary key,
+	cnpj varchar(15) not null
 )
 
 CREATE TABLE pessoa_fisica (
-	cpf varchar(11) not null primary key,
-	idPessoa int foreign key references pessoa(idPessoa)
-)
-
-CREATE TABLE tipo (
-	idTipo char(1) not null primary key,
-	decricao varchar(100) not null
+	idPessoa int foreign key references pessoa(idPessoa) primary key,
+	cpf varchar(11) not null 
 )
 
 CREATE TABLE produto (
-	idProduto int identity(1,1) primary key,
+	idProduto int primary key,
 	nome varchar(255) not null,
 	quantidade int not null,
-	preco_de_venda float not null
+	preco_de_venda numeric(16,2) not null
 )
 
 CREATE TABLE movimento(
-	idMovimento int identity(1,1) primary key,
-	tipo char(1) foreign key references tipo(idTipo),
-	usuario int foreign key references usuario(idUsuario),
-	pessoa int foreign key references pessoa(idPessoa),
-	produto int foreign key references produto(idProduto),
+	idMovimento int identity(1,1) primary key not null,
+	idUsuario int foreign key references usuario(idUsuario) not null,
+	idPessoa int foreign key references pessoa(idPessoa) not null,
+	idProduto int foreign key references produto(idProduto) not null,
 	quantidade int not null,
-	valor_unitario float not null
+	tipo char(1) not null,
+	valor_unitario numeric(16,2) not null
 )
 
 CREATE SEQUENCE idPessoa_SEQ
