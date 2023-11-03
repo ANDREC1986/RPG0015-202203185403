@@ -17,10 +17,10 @@ CREATE TABLE pessoa (
 	cidade varchar(255) not null,
 	estado varchar(2) not null,
 	telefone varchar(11) not null,
-	email varchar(255)
+	email varchar(255) not null
 )
 
-CREATE TABLE pessoa_Juridica (
+CREATE TABLE pessoa_juridica (
 	idPessoa int foreign key references pessoa(idPessoa) not null primary key,
 	cnpj varchar(15) not null
 )
@@ -31,7 +31,7 @@ CREATE TABLE pessoa_fisica (
 )
 
 CREATE TABLE produto (
-	idProduto int primary key,
+	idProduto int identity(1,1) primary key,
 	nome varchar(255) not null,
 	quantidade int not null,
 	preco_de_venda numeric(16,2) not null
@@ -49,5 +49,5 @@ CREATE TABLE movimento(
 
 CREATE SEQUENCE idPessoa_SEQ
 		AS INT
-		START WITH 1
-		INCREMENT BY 1
+		START WITH 7
+		INCREMENT BY 8

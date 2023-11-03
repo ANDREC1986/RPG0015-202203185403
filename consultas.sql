@@ -1,6 +1,6 @@
 use loja
 SELECT * FROM pessoa, pessoa_fisica WHERE pessoa.idPessoa = pessoa_fisica.idPessoa;
-SELECT * FROM pessoa, pessoa_juridica WHERE pessoa.idPessoa = pessoa_Juridica.idPessoa;
+SELECT * FROM pessoa, pessoa_juridica WHERE pessoa.idPessoa = pessoa_juridica.idPessoa;
 SELECT *, quantidade * valor_unitario as valor_total FROM movimento WHERE tipo = 'E' 
 SELECT *, quantidade * valor_unitario as valor_total FROM movimento WHERE tipo = 'S' 
 SELECT idProduto, SUM(quantidade * valor_unitario) as valor_total FROM movimento WHERE tipo = 'E' Group by idProduto
